@@ -20,6 +20,7 @@ export default class TodoInput extends Component {
   };
 
   handleAdd = (e) => {
+    if (this.state.inputValue.trim() === '') return;
     if ((e.keyCode && e.keyCode === 13) || e.type === 'click') {
       this.props.addTodo(this.state.inputValue);
       this.setState(

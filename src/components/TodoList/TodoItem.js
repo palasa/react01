@@ -1,17 +1,22 @@
-import { ListItem, ListIcon } from '@chakra-ui/layout';
+import { ListItem } from '@chakra-ui/layout';
 import { Checkbox } from '@chakra-ui/react';
-import { MdCheckCircle } from 'react-icons/md';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
-class TodoItem extends Component {
-
+// 使用 pure component ,需要更新时对props和state进行浅比较
+class TodoItem extends PureComponent {
   toggleCheckbox = () => {
-    const { onCheckedToggle, id } = this.props
-    onCheckedToggle && onCheckedToggle(id)
-  }
+    const { onCheckedToggle, id } = this.props;
+    onCheckedToggle && onCheckedToggle(id);
+  };
+
+  // 只渲染修改过的组件，提高效率
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.isCompleted !== this.props.isCompleted
+  // }
 
   render() {
-    const {id, title, isCompleted} = this.props
+    console.log('todo item rendered');
+    const { id, title, isCompleted } = this.props;
 
     return (
       <ListItem key={id}>
@@ -20,11 +25,10 @@ class TodoItem extends Component {
           defaultIsChecked={isCompleted}
           onChange={this.toggleCheckbox}
         />
-        {/* <input type="checkbox" checked={this.props.isCompleted}/> */}
         {title}
-        {isCompleted && (
+        {/* {isCompleted && (
           <ListIcon as={MdCheckCircle} color="teal.500" />
-        )}
+        )} */}
       </ListItem>
     );
   }

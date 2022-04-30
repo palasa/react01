@@ -1,7 +1,6 @@
 import { Box, Heading } from '@chakra-ui/layout';
 
 export default function TodoHeader(props) {
-  
   return (
     <Box>
       <Heading as="h1">{props.children}</Heading>
